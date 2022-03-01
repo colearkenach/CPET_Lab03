@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Edit Author</title>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Authors</title>
+    <!-- Bootstrap Core CSS -->
+
+	
+    <link rel="import" href="includes.html">
+
+</head>
+
+
+</head>
+<body>
+
+	<p id="auID"> empty </p> 
+
+<script>
+$(document).ready(function(){
+        
+    // get author information
+    $.ajax({
+        statusCode: {
+            404: function(){ alert("Author id not found"); }
+        },
+        async: true,
+        method:"POST",
+        cache: false,
+        url: "process_req.php",
+        data: { request:"get_last_au"},
+        error: function(jqXHR, textStatus, errorThrown)
+        {
+            alert(errorThrown); 
+        },
+    	success: function(data) { 
+
+		// PHP will return author encoded as JSON 
+
+		document.getElementById('auID').innerHTML = data; 
+
+ 	}
+    }); // end ajax 
+
+}); // end ready 
+  </script>
+
+</body>
+</html>
